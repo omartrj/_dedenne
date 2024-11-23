@@ -93,9 +93,16 @@ function initializeBookmarks(bookmarkGroups) {
       a.href = link.url;
 
       // Automatically fetch favicon using DuckDuckGo's API
-      const faviconUrl = `https://icons.duckduckgo.com/ip3/${
+      let faviconUrl = `https://icons.duckduckgo.com/ip3/${
         new URL(link.url).hostname
       }.ico`;
+
+      // Special case for GitHub favicon while using dark mode
+      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (link.url.includes("github.com") && isDarkMode) {
+        faviconUrl = "https://github.githubassets.com/favicons/favicon-dark.svg";
+      }
+
       a.innerHTML = `<img src="${faviconUrl}" class="favicon" alt="${link.name} favicon">${link.name}`;
 
       li.appendChild(a);

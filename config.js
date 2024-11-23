@@ -4,8 +4,8 @@ const config = {
   // Settings for the Weather Widget
   weather: {
     enabled: true,
-    apiKey: 'API_KEY', // API key for OpenWeatherMap
-    cityId: '1850147', // City ID
+    apiKey: '738ec4e4407ec72b9e52b171922877eb', // API key for OpenWeatherMap
+    cityId: '6542125', // City ID
     unit: 'metric', // 'metric' (Celsius), 'imperial' (Fahrenheit)
   },
 
@@ -18,39 +18,38 @@ const config = {
   // Bookmark groups with their respective links.
   bookmarks: [
     {
-      name: "General🏠",
+      name: "Personal🏠",
       links: [
         { url: "https://www.gmail.com", name: "Gmail" },
         { url: "https://www.youtube.com", name: "YouTube" },
-        { url: "https://www.reddit.com", name: "Reddit" }
+        { url: "https://www.amazon.com", name: "Amazon" },
+        { url: "https://chatgpt.com/", name: "ChatGPT" }
+      ],
+    },
+    {
+      name: "University🎓",
+      links: [
+        { url: "https://unistudium.unipg.it/unistudium/login/index.php", name: "Unistudium" },
+        { url: "https://outlook.office.com/mail/?actSwt=true", name: "Outlook" },
+        { url: "https://unipg.esse3.cineca.it/auth/studente/HomePageStudente.do", name: "SOL-UniPG" },
+      ],
+    },
+    {
+      name: "Piracy🏴‍☠️",
+      links: [
+        { url: "https://sci-hub.se/", name: "Sci-Hub" },
+        { url: "https://www.libgen.is/", name: "LibGen" },
+        { url: "https://thepiratebay.org/", name: "ThePirateBay" },
+        { url: "https://totalsportek.io/", name: "TotalSportek" }
       ],
     },
     {
       name: "Development💻",
       links: [
         { url: "https://www.github.com", name: "GitHub" },
-        { url: "https://stackoverflow.com", name: "Stack Overflow" },
-        { url: "https://www.codepen.io", name: "CodePen" },
-        { url: "https://www.w3schools.com", name: "W3Schools" }
+        { url: "https://www.npmjs.com", name: "npm" },
+        { url: "https://wiki.archlinux.org/", name: "ArchWiki" },
       ],
     },
-    {
-      name: "Entertainment🎮",
-      links: [
-        { url: "https://www.netflix.com", name: "Netflix" },
-        { url: "https://www.spotify.com", name: "Spotify" },
-        { url: "https://www.twitch.tv", name: "Twitch" },
-        { url: "https://www.pinterest.com", name: "Pinterest" },
-        { url: "https://www.instagram.com", name: "Instagram" }
-      ],
-    },
-    {
-      name: "Shopping🛍️",
-      links: [
-        { url: "https://www.amazon.com", name: "Amazon" },
-        { url: "https://www.ebay.com", name: "eBay" },
-        { url: "https://www.aliexpress.com", name: "AliExpress" }
-      ],
-    }
   ],
 };

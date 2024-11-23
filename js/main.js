@@ -214,6 +214,8 @@ function handleSearch(event) {
   const query = document.getElementById("search-input").value.trim();
   if (query) {
     performSearch(query);
+    // Clear the search input after submission
+    document.getElementById("search-input").value = "";
   }
 }
 

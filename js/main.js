@@ -4,7 +4,7 @@ let currentProvider = "";
 // Define search providers
 const providers = {
   duckduckgo: {
-    placeholder: "DuckDuckGo, privacy first!",
+    placeholder: "DuckDuckGo, privacy matters!",
     getQuery: (terms) =>
       `https://duckduckgo.com/?q=${encodeURIComponent(terms.join(" "))}`,
   },
@@ -21,9 +21,28 @@ const providers = {
       )}`,
   },
   reddit: {
-    placeholder: "Reddit best search engine",
+    placeholder: "Reddit, just Reddit",
     getQuery: (terms) =>
       `https://www.reddit.com/search/?q=${encodeURIComponent(terms.join(" "))}`,
+  },
+  pinterest: {
+    placeholder: "Pinterest, find your inspiration",
+    getQuery: (terms) =>
+      `https://www.pinterest.com/search/pins/?q=${encodeURIComponent(
+        terms.join(" ")
+      )}`,
+  },
+  stackoverflow: {
+    placeholder: "Stack Overflow, where coders cry together",
+    getQuery: (terms) =>
+      `https://stackoverflow.com/search?q=${encodeURIComponent(terms.join(" "))}`,
+  },
+  youtube: {
+    placeholder: "YouTube, from tutorials to cat videos",
+    getQuery: (terms) =>
+      `https://www.youtube.com/results?search_query=${encodeURIComponent(
+        terms.join(" ")
+      )}`,
   },
 };
 
@@ -32,7 +51,7 @@ const providers = {
  */
 function dedenne() {
   initializeBookmarks(config.bookmarks);
-  selectProvider(config.defaultProvider);
+  initializeProviders(config.providers);
   initializeWidgets();
 }
 
@@ -86,6 +105,38 @@ function initializeBookmarks(bookmarkGroups) {
     bookmarkGroup.appendChild(ul);
     bookmarksContainer.appendChild(bookmarkGroup);
   });
+}
+
+/**
+ * Dynamically generates and initializes search engine provider buttons based on the configuration.
+ * The first provider in the list is set as the default.
+ * @param {Array} providerIds - Array of search engine provider IDs.
+ */
+function initializeProviders(providerIds) {
+  const providersContainer = document.getElementById("providers");
+  providersContainer.innerHTML = ""; // Clear any existing providers
+
+  providerIds.forEach((providerId) => {
+    const li = document.createElement("li");
+    const button = document.createElement("button");
+    button.id = providerId;
+    button.classList.add("search-option");
+    button.title = providers[providerId].placeholder;
+    button.onclick = () => selectProvider(providerId);
+
+    const img = document.createElement("img");
+    img.src = `assets/${providerId}.svg`;
+    img.alt = providerId;
+    img.width = 24;
+    img.height = 24;
+
+    button.appendChild(img);
+    li.appendChild(button);
+    providersContainer.appendChild(li);
+  });
+
+  // Set the first provider as the default
+  selectProvider(providerIds[0]);
 }
 
 /**
@@ -250,4 +301,7 @@ function selectProvider(providerId) {
   // Update the search input placeholder
   const searchInput = document.getElementById("search-input");
   searchInput.placeholder = providers[providerId].placeholder;
+
+  // Focus on the search input after selecting a provider
+  searchInput.focus();
 }

@@ -1,6 +1,4 @@
 const config = {
-  defaultProvider: "duckduckgo", // 'duckduckgo', 'google', 'wikipedia', 'reddit'
-
   // Settings for the Weather Widget
   weather: {
     enabled: true,
@@ -14,6 +12,19 @@ const config = {
     enabled: true,
     format24Hour: true, // Use 24-hour format (true) or 12-hour format (false)
   },
+
+  // List of search engine providers
+  // Available providers: 'duckduckgo', 'google', 'wikipedia', 'reddit', 'pinterest', 'stackoverflow', 'youtube'
+  // The first provider in the list will be used as the default search engine
+  providers: [
+    'duckduckgo',
+    'reddit',
+    'pinterest',
+    'youtube',
+    // 'google',
+    // 'wikipedia',
+    // 'stackoverflow
+  ],
 
   // Bookmark groups with their respective links.
   bookmarks: [

@@ -31,7 +31,7 @@ const config = {
       links: [
         { url: "https://unistudium.unipg.it/unistudium/login/index.php", name: "Unistudium" },
         { url: "https://outlook.office.com/mail/?actSwt=true", name: "Outlook" },
-        { url: "https://unipg.esse3.cineca.it/auth/studente/HomePageStudente.do", name: "SOL-UniPG" },
+        { url: "https://unipg.esse3.cineca.it/", name: "SOL-UniPG" },
       ],
     },
     {

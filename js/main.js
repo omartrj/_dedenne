@@ -4,16 +4,19 @@ let config = {};
 // Define search providers
 const providers = {
   duckduckgo: {
+    name: "DuckDuckGo",
     placeholder: "DuckDuckGo, privacy matters!",
     getQuery: (terms) =>
       `https://duckduckgo.com/?q=${encodeURIComponent(terms.join(" "))}`,
   },
   google: {
+    name: "Google",
     placeholder: "Google, meh...",
     getQuery: (terms) =>
       `https://www.google.com/search?q=${encodeURIComponent(terms.join(" "))}`,
   },
   wikipedia: {
+    name: "Wikipedia",
     placeholder: "Wikipedia, the free encyclopedia",
     getQuery: (terms) =>
       `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
@@ -21,11 +24,13 @@ const providers = {
       )}`,
   },
   reddit: {
+    name: "Reddit",
     placeholder: "Reddit, just Reddit",
     getQuery: (terms) =>
       `https://www.reddit.com/search/?q=${encodeURIComponent(terms.join(" "))}`,
   },
   pinterest: {
+    name: "Pinterest",
     placeholder: "Pinterest, find your inspiration",
     getQuery: (terms) =>
       `https://www.pinterest.com/search/pins/?q=${encodeURIComponent(
@@ -33,6 +38,7 @@ const providers = {
       )}`,
   },
   stackoverflow: {
+    name: "Stack Overflow",
     placeholder: "Stack Overflow, where coders cry together",
     getQuery: (terms) =>
       `https://stackoverflow.com/search?q=${encodeURIComponent(
@@ -40,6 +46,7 @@ const providers = {
       )}`,
   },
   youtube: {
+    name: "YouTube",
     placeholder: "YouTube, from tutorials to cat videos",
     getQuery: (terms) =>
       `https://www.youtube.com/results?search_query=${encodeURIComponent(
@@ -146,7 +153,7 @@ function initializeProviders(providerIds) {
     const button = document.createElement("button");
     button.id = providerId;
     button.classList.add("search-option");
-    button.title = providers[providerId].placeholder;
+    button.title = providers[providerId].name;
     button.onclick = () => selectProvider(providerId);
 
     const img = document.createElement("img");

@@ -174,7 +174,6 @@ aside svg {
     background-image: var(--svg-settings-gray);
   }
 
-  #settings-button:focus,
   #settings-button:hover {
     background-color: hsl(var(--color-white-hsl) / 0.05);
   }
@@ -203,7 +202,6 @@ aside svg {
     background-image: var(--svg-settings-light-gray);
   }
 
-  #settings-button:focus,
   #settings-button:hover {
     background-color: hsl(var(--color-black-hsl) / 0.05);
   }
@@ -302,7 +300,6 @@ aside svg {
 
 /* SETTINGS */
 #settings-button {
-  /* background-image: var(--svg-settings-gray); */
   background-size: 1.5rem 1.5rem;
   background-repeat: no-repeat;
   background-position: center;
@@ -318,10 +315,39 @@ aside svg {
   right: var(--spacing-m);
 }
 
-/* #settings-button:focus,
-#settings-button:hover {
-  background-color: hsl(var(--color-white-hsl) / 0.05);
-} */
+#settings-dialog {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#settings-dialog h2 {
+  margin: 0 0 16px;
+  text-align: center;
+}
+.drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.drop-area:hover {
+  border-color: #888;
+}
+#close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
 
 /*
     Accessible hiding for screen readers

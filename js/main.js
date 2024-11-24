@@ -1,5 +1,5 @@
-// Define the current provider; this will be updated dynamically.
 let currentProvider = "";
+let config = {};
 
 // Define search providers
 const providers = {
@@ -35,7 +35,9 @@ const providers = {
   stackoverflow: {
     placeholder: "Stack Overflow, where coders cry together",
     getQuery: (terms) =>
-      `https://stackoverflow.com/search?q=${encodeURIComponent(terms.join(" "))}`,
+      `https://stackoverflow.com/search?q=${encodeURIComponent(
+        terms.join(" ")
+      )}`,
   },
   youtube: {
     placeholder: "YouTube, from tutorials to cat videos",
@@ -50,9 +52,22 @@ const providers = {
  * Initializes the application by applying user settings and generating dynamic content.
  */
 function dedenne() {
-  initializeBookmarks(config.bookmarks);
-  initializeProviders(config.providers);
+  loadUserConfig();
+  initializeBookmarks(config.bookmarkGroups);
+  initializeProviders(config.searchProviders);
   initializeWidgets();
+}
+
+/**
+ * Loads the user configuration from local storage or uses the default configuration.
+ */
+function loadUserConfig() {
+  const userConfig = localStorage.getItem("userConfig");
+  if (userConfig) {
+    config = JSON.parse(userConfig);
+  } else {
+    config = defaultConfig;
+  }
 }
 
 /**
@@ -98,9 +113,12 @@ function initializeBookmarks(bookmarkGroups) {
       }.ico`;
 
       // Special case for GitHub favicon while using dark mode
-      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
       if (link.url.includes("github.com") && isDarkMode) {
-        faviconUrl = "https://github.githubassets.com/favicons/favicon-dark.svg";
+        faviconUrl =
+          "https://github.githubassets.com/favicons/favicon-dark.svg";
       }
 
       a.innerHTML = `<img src="${faviconUrl}" class="favicon" alt="${link.name} favicon">${link.name}`;
@@ -150,12 +168,12 @@ function initializeProviders(providerIds) {
  * Initializes the widgets (weather and date-time) based on the configuration.
  */
 function initializeWidgets() {
-  if (config.weather.enabled) {
-    initializeWeatherWidget(config.weather);
+  if (config.widgets.weather.enabled) {
+    initializeWeatherWidget(config.widgets.weather);
   }
 
-  if (config.dateTime.enabled) {
-    initializeDateTimeWidget(config.dateTime);
+  if (config.widgets.dateTime.enabled) {
+    initializeDateTimeWidget(config.widgets.dateTime);
   }
 }
 

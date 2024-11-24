@@ -311,7 +311,8 @@ function performSearch(query) {
   const terms = query.split(" ");
   const provider = providers[currentProvider];
   const url = provider.getQuery(terms);
-  window.open(url, "_blank"); // Open search results in a new tab
+  //window.open(url, "_blank"); // Open search results in a new tab
+  window.location = url; // Open search results in the same tab
 }
 
 /**

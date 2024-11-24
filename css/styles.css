@@ -129,6 +129,10 @@ aside svg {
   filter: none;
 }
 
+#dock li button.selected img {
+  animation: slime 0.5s ease;
+}
+
 /* SEARCH BAR */
 #search {
   display: flex;
@@ -220,13 +224,13 @@ aside svg {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--spacing-m);
+  gap: var(--spacing-l);
   padding: 0 var(--spacing-m);
 }
 
 .bookmark-group {
-  flex: 1 1 10rem;
-  max-width: 12rem;
+  /* flex: 1 1 10rem; */
+  /* max-width: 11rem; */
   display: flex;
   flex-direction: column;
   gap: var(--spacing-s);

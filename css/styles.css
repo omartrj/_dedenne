@@ -169,6 +169,15 @@ aside svg {
   #bookmarks a:hover {
     background-color: hsl(var(--color-white-hsl) / 0.05);
   }
+
+  #settings-button {
+    background-image: var(--svg-settings-gray);
+  }
+
+  #settings-button:focus,
+  #settings-button:hover {
+    background-color: hsl(var(--color-white-hsl) / 0.05);
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -187,6 +196,15 @@ aside svg {
 
   #bookmarks a:focus,
   #bookmarks a:hover {
+    background-color: hsl(var(--color-black-hsl) / 0.05);
+  }
+
+  #settings-button {
+    background-image: var(--svg-settings-light-gray);
+  }
+
+  #settings-button:focus,
+  #settings-button:hover {
     background-color: hsl(var(--color-black-hsl) / 0.05);
   }
 }
@@ -234,7 +252,7 @@ aside svg {
 
 .bookmark-group button[aria-expanded="false"]::after {
   transform: rotate(180deg);
-}  
+}
 
 .bookmark-group button[aria-expanded="false"] + ul {
   max-height: 0;
@@ -282,6 +300,29 @@ aside svg {
   outline: none;
 }
 
+/* SETTINGS */
+#settings-button {
+  /* background-image: var(--svg-settings-gray); */
+  background-size: 1.5rem 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  position: fixed;
+  bottom: var(--spacing-m);
+  right: var(--spacing-m);
+}
+
+/* #settings-button:focus,
+#settings-button:hover {
+  background-color: hsl(var(--color-white-hsl) / 0.05);
+} */
+
 /*
     Accessible hiding for screen readers
     https://webaim.org/techniques/css/invisiblecontent/#techniques
@@ -296,7 +337,6 @@ aside svg {
 }
 
 @media screen and (max-width: 420px) {
-
   header {
     display: none;
   }

@@ -1,0 +1,15 @@
+services:
+  dedenne:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dedenne-image
+    ports:
+      - "50000:80"
+    restart: unless-stopped
+    container_name: dedenne-server
+    networks:
+      - dedenne-network
+networks:
+  dedenne-network:
+    name: dedenne-network

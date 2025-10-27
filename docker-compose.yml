@@ -8,6 +8,8 @@ services:
       - "50000:80"
     restart: unless-stopped
     container_name: dedenne-server
+    volumes:
+      - "$HOME/.config/dedenne/config.json:/usr/share/nginx/html/config.json:ro"
     networks:
       - dedenne-network
 networks:

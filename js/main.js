@@ -57,23 +57,59 @@ const providers = {
 
 /**
  * Initializes the application by applying user settings and generating dynamic content.
+ * La funzione è asincrona per attendere il caricamento della configurazione.
  */
-function dedenne() {
-  loadUserConfig();
+async function dedenne() {
+  await loadUserConfig(); // Attende il caricamento della configurazione
   initializeBookmarks(config.bookmarkGroups);
   initializeProviders(config.searchProviders);
   initializeWidgets();
 }
 
 /**
- * Loads the user configuration from local storage or uses the default configuration.
+ * Loads the user configuration by fetching '/config.json' (from volume mount).
+ * Falls back to '/default_config.json' (from image) if the primary fetch fails.
  */
-function loadUserConfig() {
-  const userConfig = localStorage.getItem("userConfig");
-  if (userConfig) {
-    config = JSON.parse(userConfig);
-  } else {
-    config = defaultConfig;
+async function loadUserConfig() {
+  try {
+    // 1. Prova a caricare la configurazione utente da /config.json
+    const response = await fetch("config.json");
+    if (!response.ok) {
+      throw new Error(
+        `HTTP error ${response.status}: Failed to fetch config.json`
+      );
+    }
+    config = await response.json();
+    console.log("Successfully loaded user config from /config.json");
+  } catch (userConfigError) {
+    // 2. Se fallisce, logga l'errore e prova a caricare la configurazione di default
+    console.warn(
+      `Could not load user config from /config.json. (${userConfigError.message}). Trying /default_config.json...`
+    );
+
+    try {
+      const defaultResponse = await fetch("default_config.json");
+      if (!defaultResponse.ok) {
+        throw new Error(
+          `HTTP error ${defaultResponse.status}: Failed to fetch default_config.json`
+        );
+      }
+      config = await defaultResponse.json();
+      console.log(
+        "Successfully loaded fallback config from /default_config.json"
+      );
+    } catch (defaultConfigError) {
+      // 3. Se falliscono entrambi, l'app non può funzionare.
+      console.error(
+        `FATAL: Could not load default config. (${defaultConfigError.message}). Dedenne will not load correctly.`
+      );
+      // Imposta una config vuota per evitare errori runtime
+      config = {
+        bookmarkGroups: [],
+        searchProviders: [],
+        widgets: { weather: { enabled: false }, dateTime: { enabled: false } },
+      };
+    }
   }
 }
 
@@ -91,6 +127,8 @@ function initializeBookmarks(bookmarkGroups) {
   h2.classList.add("sr-only");
   h2.textContent = "Bookmarks";
   bookmarksContainer.appendChild(h2);
+
+  if (!bookmarkGroups) return; // Aggiunto controllo di sicurezza
 
   bookmarkGroups.forEach((group, index) => {
     const groupId = `bookmark-group-${index + 1}`;
@@ -148,7 +186,18 @@ function initializeProviders(providerIds) {
   const providersContainer = document.getElementById("providers");
   providersContainer.innerHTML = ""; // Clear any existing providers
 
+  if (!providerIds || providerIds.length === 0) {
+    // Aggiunto controllo di sicurezza
+    document.getElementById("search-form").style.display = "none"; // Nasconde la ricerca
+    return;
+  }
+
   providerIds.forEach((providerId) => {
+    if (!providers[providerId]) {
+      // Controlla se il provider esiste
+      console.warn(`Search provider "${providerId}" is not defined.`);
+      return;
+    }
     const li = document.createElement("li");
     const button = document.createElement("button");
     button.id = providerId;
@@ -175,11 +224,11 @@ function initializeProviders(providerIds) {
  * Initializes the widgets (weather and date-time) based on the configuration.
  */
 function initializeWidgets() {
-  if (config.widgets.weather.enabled) {
+  if (config.widgets?.weather?.enabled) {
     initializeWeatherWidget(config.widgets.weather);
   }
 
-  if (config.widgets.dateTime.enabled) {
+  if (config.widgets?.dateTime?.enabled) {
     initializeDateTimeWidget(config.widgets.dateTime);
   }
 }
@@ -194,11 +243,11 @@ function initializeWeatherWidget(weatherConfig) {
   const weatherSection = document.getElementById("weather");
 
   // Ensure the API key and city ID are provided
-  if (!apiKey || !cityId) {
+  if (!apiKey || apiKey === "API_KEY" || !cityId || cityId === "CITY_ID") {
     console.error(
-      "Weather widget is enabled, but API key or City ID is missing."
+      "Weather widget is enabled, but API key or City ID is missing or not configured."
     );
-    weatherSection.innerText = "Weather information unavailable.";
+    weatherSection.innerText = "Weather widget needs configuration.";
     return;
   }
 
@@ -310,6 +359,10 @@ function handleSearch(event) {
 function performSearch(query) {
   const terms = query.split(" ");
   const provider = providers[currentProvider];
+  if (!provider) {
+    console.error(`No provider selected or "${currentProvider}" is invalid.`);
+    return;
+  }
   const url = provider.getQuery(terms);
   //window.open(url, "_blank"); // Open search results in a new tab
   window.location = url; // Open search results in the same tab
@@ -321,6 +374,15 @@ function performSearch(query) {
  * @param {string} providerId - The ID of the provider to select.
  */
 function selectProvider(providerId) {
+  if (!providers[providerId]) {
+    console.warn(
+      `Attempted to select invalid provider: "${providerId}". Defaulting to none.`
+    );
+    currentProvider = "";
+    document.getElementById("search-input").placeholder =
+      "No search provider configured...";
+    return;
+  }
   currentProvider = providerId;
 
   // Toggle the selected state for search buttons

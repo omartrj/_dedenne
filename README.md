@@ -7,13 +7,32 @@
 ### ✨ **New features in _dedenne**
 - **Customizable Search Engines**: You can now choose between different search engines to use for your searches, including DuckDuckGo, Youtube, Pinterest, and more (full list [here](#supported-providers)).
 - **Organized Bookmarks**: You can now organize your bookmarks into categories with collapsible sections.
-- **Local Configuration Storage**: Your configuration settings are now stored locally in your browser, so you won't lose your settings when you refresh the page or close your browser.
 
-### 🚀 **How to use**
-1. Navigate to the [website](https://omartrj.github.io/_dedenne/) and configure it as your browser's start page.
-2. Open the settings menu (⚙️ icon in the bottom-right corner of the page) to upload your personalized JSON configuration file. A [sample configuration](default_config.json) is provided for reference.
+### 🚀 **How to use (Self-Hosting with Docker)**
+The primary installation method is via Docker, which allows you to centralize your configuration into a single file on your host machine.
+1. Clone or download this repository:
+    ```bash
+    git clone https://github.com/omartrj/_dedenne.git
+    cd _dedenne
+   ```
+2. Create your configuration file:
+    ```bash
+    # Create the directory
+    mkdir -p $HOME/.config/dedenne
+
+    # Copy the default configuration as a starting point
+    cp default_config.json $HOME/.config/dedenne/config.json
+    ```
+3. Edit the configuration file to your liking.
+4. Launch with Docker Compose:
+    ```bash
+    docker-compose up -d
+    ```
+5. Open your browser and navigate to `http://localhost:50000` to see your new start page!
 
 **Alternatively**, you can fork this repository and host the page on your own server or GitHub Pages.
+
+**Public Demo:** You can see a live (non-configurable) demo of _dedenne_  [here](https://omartrj.github.io/_dedenne/). This version will only load the default configuration.
 
 ### ⚙️ **Configuration overview**
 The configuration file is a JSON object that allows you to customize the start page to your liking. Here's an overview of the available options:

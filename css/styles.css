@@ -302,57 +302,6 @@ aside svg {
   outline: none;
 }
 
-/* SETTINGS */
-#settings-button {
-  background-size: 1.5rem 1.5rem;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 0;
-  border-radius: 50%;
-  cursor: pointer;
-  padding: 0;
-  position: fixed;
-  bottom: var(--spacing-m);
-  right: var(--spacing-m);
-}
-
-#settings-dialog {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  width: 400px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-#settings-dialog h2 {
-  margin: 0 0 16px;
-  text-align: center;
-}
-.drop-area {
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-}
-.drop-area:hover {
-  border-color: #888;
-}
-#close-button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
 /*
     Accessible hiding for screen readers
     https://webaim.org/techniques/css/invisiblecontent/#techniques

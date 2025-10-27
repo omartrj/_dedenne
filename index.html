@@ -14,7 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.svg">
     <script src="js/main.js"></script>
-    <script src="js/settings.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <title>dedenne</title>
 </head>
@@ -72,18 +71,6 @@
         <section id="bookmarks">
             <h2 class="sr-only">Bookmarks</h2>
         </section>
-        <button id="settings-button" onclick="openDialog()"></button>
-        <dialog id="settings-dialog">
-            <button id="close-button" onclick="closeDialog()">✖</button>
-            <h2>Upload your settings</h2>
-            <div class="drop-area" id="drop-area" onclick="handleFileClick()" ondragover="handleDragOver(event)"
-                ondragleave="handleDragLeave()" ondrop="handleDrop(event)">
-                Drag & Drop your JSON/JSONC file here or click to select.
-                <input type="file" id="file-input" accept=".json,.jsonc" style="display: none;"
-                    onchange="handleFile(this.files[0])">
-            </div>
-        </dialog>
-
     </main>
 </body>
 

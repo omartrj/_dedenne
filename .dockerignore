@@ -12,6 +12,3 @@ docker-compose.yml
 .vscode
 config.json
 README.md
-
-# Environment files
-.env

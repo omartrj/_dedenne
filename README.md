@@ -32,13 +32,6 @@ The primary installation method is via Docker Compose. Make sure you have [Docke
     ```
 5. Open your browser and navigate to `http://localhost:8080` to see your new start page!
 
-You can change both the configuration file path and the port by modifying the `DEDENNE_CONFIG_PATH` and `DEDENNE_PORT` variables in the `.env` file. 
-
-```bash
-# Copy the example environment file
-cp .env.example .env
-```
-
 **Alternatively**, you can fork this repository and host the page on your own server or GitHub Pages.
 
 ### ⚙️ **Configuration overview**

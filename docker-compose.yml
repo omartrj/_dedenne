@@ -5,11 +5,11 @@ services:
       dockerfile: Dockerfile
     image: dedenne-image
     ports:
-      - "${DEDENNE_PORT:-8080}:80"
+      - "8080:80"
     restart: unless-stopped
     container_name: dedenne-server
     volumes:
-      - "${DEDENNE_CONFIG_PATH:-./config.json}:/usr/share/nginx/html/config.json:ro"
+      - "./config.json:/usr/share/nginx/html/config.json:ro"
     networks:
       - dedenne-network
 networks:

@@ -1,8 +1,5 @@
 # Ignore configuration files
 config.json
 
-# Ignore .env files
-.env
-
 # Ignore IDE settings
 .vscode

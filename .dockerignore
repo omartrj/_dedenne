@@ -1,0 +1,14 @@
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Other
+.vscode
+config.json
+README.md

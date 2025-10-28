@@ -60,7 +60,7 @@ const providers = {
  * La funzione è asincrona per attendere il caricamento della configurazione.
  */
 async function dedenne() {
-  await loadUserConfig(); // Attende il caricamento della configurazione
+  await loadUserConfig();
   initializeBookmarks(config.bookmarkGroups);
   initializeProviders(config.searchProviders);
   initializeWidgets();

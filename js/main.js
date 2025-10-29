@@ -61,6 +61,7 @@ const providers = {
  */
 async function dedenne() {
   await loadUserConfig();
+  initializeLogo(config.logo);
   initializeBookmarks(config.bookmarkGroups);
   initializeProviders(config.searchProviders);
   initializeWidgets();
@@ -103,13 +104,27 @@ async function loadUserConfig() {
       console.error(
         `FATAL: Could not load default config. (${defaultConfigError.message}). Dedenne will not load correctly.`
       );
-      // Imposta una config vuota per evitare errori runtime
-      config = {
-        bookmarkGroups: [],
-        searchProviders: [],
-        widgets: { weather: { enabled: false }, dateTime: { enabled: false } },
-      };
+      config = {};
     }
+  }
+}
+
+/**
+ * Initializes the logo based on the configuration.
+ * Supports either text-based or SVG/image-based logos.
+ * @param {Object} logoConfig - Logo settings from the configuration.
+ */
+function initializeLogo(logoConfig) {
+  const textLogo = document.getElementById("text-logo");
+  const svgLogo = document.getElementById("svg-logo");
+
+  if (logoConfig.type === "text") {
+    svgLogo.style.display = "none";
+  } else if (logoConfig.type === "image") {
+    textLogo.style.display = "none";
+  } else {
+    // Default to text logo if type is unrecognized
+    textLogo.style.display = "none";
   }
 }
 

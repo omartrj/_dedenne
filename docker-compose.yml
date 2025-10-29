@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     image: dedenne-image
     ports:
-      - "8080:80"
+      - "50000:80"
     restart: unless-stopped
     container_name: dedenne-server
     volumes:

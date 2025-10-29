@@ -1,4 +1,7 @@
 {
+  "logo": {
+    "type": "image"  
+  },
   "widgets": {
     "weather": {
       "enabled": true,

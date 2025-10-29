@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     container_name: dedenne-server
     volumes:
-      - "./config.json:/usr/share/nginx/html/config.json:ro"
+      - "./config.jsonc:/usr/share/nginx/html/config.jsonc:ro"
     networks:
       - dedenne-network
 networks:

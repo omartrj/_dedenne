@@ -29,7 +29,7 @@ The primary installation method is via Docker Compose. Make sure you have [Docke
 3. Edit the configuration file to your liking. See [here](#⚙️-configuration-overview) for details on the available options.
 4. Launch with Docker Compose:
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 5. Open your browser and navigate to `http://localhost:8080` to see your new start page!
 

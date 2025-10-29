@@ -68,36 +68,36 @@ async function dedenne() {
 }
 
 /**
- * Loads the user configuration by fetching './configs/config.jsonc' (from volume mount).
- * Falls back to './configs/default_config.jsonc' (from image) if the primary fetch fails.
+ * Loads the user configuration by fetching './configs/config.json' (from volume mount).
+ * Falls back to './configs/default_config.json' (from image) if the primary fetch fails.
  */
 async function loadUserConfig() {
   try {
-    // 1. Prova a caricare la configurazione utente da ./configs/config.jsonc
-    const response = await fetch("./configs/config.jsonc");
+    // 1. Prova a caricare la configurazione utente da ./configs/config.json
+    const response = await fetch("./configs/config.json");
     if (!response.ok) {
       throw new Error(
-        `HTTP error ${response.status}: Failed to fetch ./configs/config.jsonc`
+        `HTTP error ${response.status}: Failed to fetch ./configs/config.json`
       );
     }
     config = await response.json();
-    console.log("Successfully loaded user config from ./configs/config.jsonc");
+    console.log("Successfully loaded user config from ./configs/config.json");
   } catch (userConfigError) {
     // 2. Se fallisce, logga l'errore e prova a caricare la configurazione di default
     console.warn(
-      `Could not load user config from ./configs/config.jsonc. (${userConfigError.message}). Trying ./configs/default_config.jsonc...`
+      `Could not load user config from ./configs/config.json. (${userConfigError.message}). Trying ./configs/default_config.json...`
     );
 
     try {
-      const defaultResponse = await fetch("./configs/default_config.jsonc");
+      const defaultResponse = await fetch("./configs/default_config.json");
       if (!defaultResponse.ok) {
         throw new Error(
-          `HTTP error ${defaultResponse.status}: Failed to fetch ./configs/default_config.jsonc`
+          `HTTP error ${defaultResponse.status}: Failed to fetch ./configs/default_config.json`
         );
       }
       config = await defaultResponse.json();
       console.log(
-        "Successfully loaded fallback config from /configs/default_config.jsonc"
+        "Successfully loaded fallback config from /configs/default_config.json"
       );
     } catch (defaultConfigError) {
       // 3. Se falliscono entrambi, l'app non può funzionare.

@@ -1,20 +1,20 @@
 {
   "logo": {
-    "type": "image"  // "image" or "text"
+    "type": "image" 
   },
   "widgets": {
     "weather": {
       "enabled": true,
       "apiKey": "API_KEY",
       "cityId": "CITY_ID",
-      "unit": "metric" // "metric" or "imperial"
+      "unit": "metric" 
     },
     "dateTime": {
       "enabled": true,
       "format24Hour": true
     }
   },
-  "searchProviders": ["duckduckgo", "google", "youtube"], // Available providers: duckduckgo, google, youtube, wikipedia, reddit, pinterest, stackoverflow
+  "searchProviders": ["duckduckgo", "google", "youtube"],
   "bookmarkGroups": [
     {
       "name": "Personal🏠",

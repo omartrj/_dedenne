@@ -12,6 +12,7 @@
 - **Weather Information**: Get real-time weather updates for your location.
 - **Date & Time Display**: View the current date and time in either 12-hour or 24-hour format.
 - **Light and Dark Modes**: Switch between light and dark themes based on your preference or system settings.
+- **Responsive Design**: The layout adapts seamlessly to different screen sizes, ensuring a great user experience on both desktop and mobile devices.
 
 ### 🚀 **How to use (Self-Hosting with Docker)**
 The primary installation method is via Docker Compose. Make sure you have [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed on your machine.
@@ -25,7 +26,7 @@ The primary installation method is via Docker Compose. Make sure you have [Docke
     # Copy the default configuration as a starting point
     cp default_config.json config.json
     ```
-3. Edit the configuration file to your liking.
+3. Edit the configuration file to your liking. See [here](#⚙️-configuration-overview) for details on the available options.
 4. Launch with Docker Compose:
     ```bash
     docker-compose up -d
@@ -36,6 +37,8 @@ The primary installation method is via Docker Compose. Make sure you have [Docke
 
 ### ⚙️ **Configuration overview**
 The configuration file is a JSON object that allows you to customize the start page to your liking. Here's an overview of the available options:
+
+**Logo:** you can either use the default _dedenne_ logo using `"type": "image"`, or use the text logo with `"type": "text"`. 
 
 **Weather:** displays the current weather in your location. You will need to generate your own OpenWeather API key and city ID. Available units are `metric` and `imperial`.
 

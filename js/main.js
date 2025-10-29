@@ -68,36 +68,36 @@ async function dedenne() {
 }
 
 /**
- * Loads the user configuration by fetching '/config.json' (from volume mount).
- * Falls back to '/default_config.json' (from image) if the primary fetch fails.
+ * Loads the user configuration by fetching '/config.jsonc' (from volume mount).
+ * Falls back to '/default_config.jsonc' (from image) if the primary fetch fails.
  */
 async function loadUserConfig() {
   try {
-    // 1. Prova a caricare la configurazione utente da /config.json
-    const response = await fetch("config.json");
+    // 1. Prova a caricare la configurazione utente da /config.jsonc
+    const response = await fetch("config.jsonc");
     if (!response.ok) {
       throw new Error(
-        `HTTP error ${response.status}: Failed to fetch config.json`
+        `HTTP error ${response.status}: Failed to fetch config.jsonc`
       );
     }
     config = await response.json();
-    console.log("Successfully loaded user config from /config.json");
+    console.log("Successfully loaded user config from /config.jsonc");
   } catch (userConfigError) {
     // 2. Se fallisce, logga l'errore e prova a caricare la configurazione di default
     console.warn(
-      `Could not load user config from /config.json. (${userConfigError.message}). Trying /default_config.json...`
+      `Could not load user config from /config.jsonc. (${userConfigError.message}). Trying /default_config.jsonc...`
     );
 
     try {
-      const defaultResponse = await fetch("default_config.json");
+      const defaultResponse = await fetch("default_config.jsonc");
       if (!defaultResponse.ok) {
         throw new Error(
-          `HTTP error ${defaultResponse.status}: Failed to fetch default_config.json`
+          `HTTP error ${defaultResponse.status}: Failed to fetch default_config.jsonc`
         );
       }
       config = await defaultResponse.json();
       console.log(
-        "Successfully loaded fallback config from /default_config.json"
+        "Successfully loaded fallback config from /default_config.jsonc"
       );
     } catch (defaultConfigError) {
       // 3. Se falliscono entrambi, l'app non può funzionare.

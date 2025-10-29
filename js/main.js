@@ -68,36 +68,36 @@ async function dedenne() {
 }
 
 /**
- * Loads the user configuration by fetching '/config.jsonc' (from volume mount).
- * Falls back to '/default_config.jsonc' (from image) if the primary fetch fails.
+ * Loads the user configuration by fetching './configs/config.jsonc' (from volume mount).
+ * Falls back to './configs/default_config.jsonc' (from image) if the primary fetch fails.
  */
 async function loadUserConfig() {
   try {
-    // 1. Prova a caricare la configurazione utente da /config.jsonc
-    const response = await fetch("config.jsonc");
+    // 1. Prova a caricare la configurazione utente da ./configs/config.jsonc
+    const response = await fetch("./configs/config.jsonc");
     if (!response.ok) {
       throw new Error(
-        `HTTP error ${response.status}: Failed to fetch config.jsonc`
+        `HTTP error ${response.status}: Failed to fetch ./configs/config.jsonc`
       );
     }
     config = await response.json();
-    console.log("Successfully loaded user config from /config.jsonc");
+    console.log("Successfully loaded user config from ./configs/config.jsonc");
   } catch (userConfigError) {
     // 2. Se fallisce, logga l'errore e prova a caricare la configurazione di default
     console.warn(
-      `Could not load user config from /config.jsonc. (${userConfigError.message}). Trying /default_config.jsonc...`
+      `Could not load user config from ./configs/config.jsonc. (${userConfigError.message}). Trying ./configs/default_config.jsonc...`
     );
 
     try {
-      const defaultResponse = await fetch("default_config.jsonc");
+      const defaultResponse = await fetch("./configs/default_config.jsonc");
       if (!defaultResponse.ok) {
         throw new Error(
-          `HTTP error ${defaultResponse.status}: Failed to fetch default_config.jsonc`
+          `HTTP error ${defaultResponse.status}: Failed to fetch ./configs/default_config.jsonc`
         );
       }
       config = await defaultResponse.json();
       console.log(
-        "Successfully loaded fallback config from /default_config.jsonc"
+        "Successfully loaded fallback config from /configs/default_config.jsonc"
       );
     } catch (defaultConfigError) {
       // 3. Se falliscono entrambi, l'app non può funzionare.
@@ -120,11 +120,14 @@ function initializeLogo(logoConfig) {
 
   if (logoConfig.type === "text") {
     svgLogo.style.display = "none";
+    textLogo.style.display = "block";
   } else if (logoConfig.type === "image") {
     textLogo.style.display = "none";
+    svgLogo.style.display = "flex";
   } else {
     // Default to text logo if type is unrecognized
     textLogo.style.display = "none";
+    svgLogo.style.display = "flex";
   }
 }
 

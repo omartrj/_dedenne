@@ -24,7 +24,7 @@ The primary installation method is via Docker Compose. Make sure you have [Docke
 2. Create your configuration file:
     ```bash
     # Copy the default configuration as a starting point
-    cp default_config.jsonc config.jsonc
+    cp configs/default_config.jsonc configs/config.jsonc
     ```
 3. Edit the configuration file to your liking. See [here](#⚙️-configuration-overview) for details on the available options.
 4. Launch with Docker Compose:

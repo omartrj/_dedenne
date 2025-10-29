@@ -10,5 +10,5 @@ docker-compose.yml
 
 # Other
 .vscode
-config.jsonc
+configs/config.jsonc
 README.md

@@ -1,5 +1,5 @@
 # Ignore configuration files
-config.jsonc
+configs/config.jsonc
 
 # Ignore IDE settings
 .vscode

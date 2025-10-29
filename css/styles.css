@@ -83,8 +83,10 @@ aside svg {
 
 /* TEXT LOGO */
 pre {
+  justify-content: space-around;
   color: hsl(var(--color-orange-hsl));
   font-weight: 600;
+  padding: var(--spacing-m) 0 var(--spacing-l) 0;
 }
 
 pre a {
